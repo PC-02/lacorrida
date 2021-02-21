@@ -13,6 +13,8 @@ class MyBot(ActivityHandler):
 	can tap to provide input.
 	"""
 	houseData.getHousing()
+	global houseNum
+	houseNum = None
 
 
 	async def on_members_added_activity(
@@ -28,9 +30,13 @@ class MyBot(ActivityHandler):
 		"""
 		Respond to the users choice and display the suggested actions again.
 		"""
+		global houseNum
+
+		if houseNum is None:
+			houseNum = 0
 
 		text = turn_context.activity.text.lower()
-		response_text = self._process_input(text,0)
+		response_text = self._process_input(text,houseNum)
 
 		await turn_context.send_activity(MessageFactory.text(response_text))
 
@@ -47,16 +53,26 @@ class MyBot(ActivityHandler):
 
 				await self._send_suggested_actions(turn_context)
 
-	async def _process_input(self, text: str, num: int):
+
+	def _process_input(self, text: str, num: int):
 
 		if text == "housing":
 			numPosts = num + 3
+			msg = ""
+			global houseNum
 
 			while num <= numPosts:
-				await turn_context.send_activity(MessageFactory.text( "a" ))
+				msg += houseData.post_titles[num]
+				msg += "\n"
+				msg += "Located in " + houseData.post_areas[num] + " with " + str(houseData.post_sqft[num]) + "sqft and "  
+				msg +=  str(houseData.post_br[num]) + "bedroom, priced at " + houseData.post_prices[num]
+				msg += "\n"
+				msg +="Learn more here: " + houseData.post_links[num]
+				msg += "\n\n\n"
 				num += 1
-
-		return
+		
+			houseNum = num
+			return msg
 
 		if text == "resources":
 			return f"do Resources"
