@@ -74,9 +74,6 @@ class MyBot(ActivityHandler):
 			houseNum = num
 			return msg
 
-		if text == "resources":
-			return f"do Resources"
-
 		return "Please select a valid option from the provided choices"
 
 	async def _send_suggested_actions(self, turn_context: TurnContext):
@@ -97,9 +94,24 @@ class MyBot(ActivityHandler):
 					value="Housing",
 				),
 				CardAction(
-					title="Resources",
+					title="Food Joints",
 					type=ActionTypes.im_back,
-					value="Resources",
+					value="Food Joints",
+				),
+				CardAction(
+					title="Job Listings",
+					type=ActionTypes.im_back,
+					value="Job Listings",
+				),
+				CardAction(
+					title="Misc Resources",
+					type=ActionTypes.im_back,
+					value="Misc Resources",
+				),
+				CardAction(
+					title="Community Chat",
+					type=ActionTypes.im_back,
+					value="Community Chat",
 				),
 			]
 		)

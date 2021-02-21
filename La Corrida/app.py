@@ -63,13 +63,13 @@ ADAPTER.on_turn_error = on_error
 # Create the Bot
 BOT = MyBot()
 
-stringList = {"Name": "John", "Language": "Python", "API": "pyTelegramBotAPI"}
+# stringList = {"Name": "John", "Language": "Python", "API": "pyTelegramBotAPI"}
 
-for key, value in stringList.items():
-    markup.add(types.InlineKeyboardButton(text=value,
-                                          callback_data="['value', '" + value + "', '" + key + "']"),
-               types.InlineKeyboardButton(text=crossIcon,
-                                          callback_data="['key', '" + key + "']"))
+# for key, value in stringList.items():
+#     markup.add(types.InlineKeyboardButton(text=value,
+#                                           callback_data="['value', '" + value + "', '" + key + "']"),
+#                types.InlineKeyboardButton(text=crossIcon,
+#                                           callback_data="['key', '" + key + "']"))
 
 
 # Listen for incoming requests on /api/messages
